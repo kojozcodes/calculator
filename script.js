@@ -89,3 +89,25 @@ function operate(operator, a, b) {
       secondNumber = '';
     }
   }
+
+  function addDecimal() {
+    if (!displayElement.value.includes('.')) {
+        if (operator === '') {
+            firstNumber += '.';
+            updateDisplay(firstNumber);
+        } else {
+            secondNumber += '.';
+            updateDisplay(secondNumber);
+        }
+    }
+}
+
+function backspace() {
+    if (operator === '') {
+        firstNumber = firstNumber.slice(0, -1);
+        updateDisplay(firstNumber);
+    } else if (secondNumber !== '') {
+        secondNumber = secondNumber.slice(0, -1);
+        updateDisplay(secondNumber);
+    }
+}

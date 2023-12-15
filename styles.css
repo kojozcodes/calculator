@@ -62,7 +62,7 @@ body {
   }
 
   button.clear:hover {
-    background-color: #ff4444b4;
+    background-color: #E64A19;
     color: black;
   }
 
@@ -81,3 +81,21 @@ body {
     display: flex;
     flex: 1;
   }
+
+  button.decimal {
+    background-color: #2196F3;
+    color: white;
+}
+
+button.decimal:hover {
+    background-color: #1565C0;
+}
+
+button.backspace {
+    background-color: #ff4444;
+    color: white;
+}
+
+button.backspace:hover {
+    background-color: #E64A19;
+}

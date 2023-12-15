@@ -1,84 +1,91 @@
-
-const add = (num1 , num2) => {
-    return num1 + num2
-}
-
-const subtract = (num1,num2) => {
-    return num1 - num2
-}
-
-const multiply = (num1,num2) => {
-    return num1 * num2
-}
-
-const divide = (num1,num2) => {
-    if (num2 !== 0) {
-        return num1/num2
+function add(a, b) {
+    return a + b;
+  }
+  
+  function subtract(a, b) {
+    return a - b;
+  }
+  
+  function multiply(a, b) {
+    return a * b;
+  }
+  
+  function divide(a, b) {
+    if (b !== 0) {
+      return a / b;
     } else {
-        return "Cannot divide by zero"
+      handleDivisionByZero();
     }
-}
+  }
+
+  function handleDivisionByZero() {
+    clearDisplay();
+    updateDisplay("Error: Cannot divide by zero");
+  }
 
 let firstNumber = '';
 let operator = '';
 let secondNumber = '';
 
-let display = document.querySelector('#cal-display')
+function operate(operator, a, b) {
+    switch (operator) {
+      case '+':
+        return add(a, b);
+      case '-':
+        return subtract(a, b);
+      case '*':
+        return multiply(a, b);
+      case '/':
+        return divide(a, b);
+      default:
+        return "Invalid operator";
+    }
+  }
 
-const appendNumber = (num) => {
+  const displayElement = document.getElementById('display');
+
+  // Function to append a number to the display
+  function appendNumber(number) {
     if (operator === '') {
-        firstNumber += num
-        updateDisplay(firstNumber)
+      firstNumber += number;
+      updateDisplay(firstNumber);
     } else {
-        secondNumber += num
-        updateDisplay(secondNumber)
+      secondNumber += number;
+      updateDisplay(secondNumber);
     }
-}
+  }
 
-const setOperator = (op) => {
+  // Function to set the operator
+  function setOperator(op) {
     if (firstNumber !== '' && secondNumber === '') {
-       operator = op
-       updateDisplay(`${firstNumber} ${operator}`)
+      operator = op;
+      updateDisplay(firstNumber + ' ' + operator);
+    } else if (firstNumber !== '' && secondNumber !== '') {
+        calculateResult()
+        operator = op
+        updateDisplay(firstNumber)
     }
-}
+  }
 
-const clearDisplay = () => {
+  // Function to clear the display
+  function clearDisplay() {
     firstNumber = '';
-    secondNumber = '';
     operator = '';
-    updateDisplay('0')
-}
+    secondNumber = '';
+    updateDisplay('0');
+  }
 
-const updateDisplay = (value) => {
-    display.value = value
-}
+  // Function to update the display with a given value
+  function updateDisplay(value) {
+    displayElement.value = value;
+  }
 
-const calculate = () => {
+  function calculateResult() {
     if (firstNumber !== '' && operator !== '' && secondNumber !== '') {
-        const result = operate(parseFloat(firstNumber), operator, parseFloat(secondNumber))
-        updateDisplay(result)
-        firstNumber = result.toString();
-        operator = ''
-        secondNumber = ''
+      const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+      updateDisplay(result);
+      firstNumber = result.toString();
+      operator = '';
+      secondNumber = '';
     }
-}
-
-const operate = (num1, op, num2) => {
-    switch (op) {
-        case '+':
-            add(num1, num2)
-            break;
-        
-        case '-':
-            subtract(num1, num2)
-            break;
-
-        case '*':
-            multiply(num1, num2)
-            break;
-
-        case '/':
-            divide(num1, num2)
-            break;
-    }
-}
+  }
